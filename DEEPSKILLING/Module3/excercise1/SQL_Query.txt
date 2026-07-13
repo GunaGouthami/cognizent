@@ -1,0 +1,70 @@
+CREATE DATABASE OnlineRetailStore;
+GO
+
+USE OnlineRetailStore;
+GO
+
+CREATE TABLE Products (
+    ProductID INT PRIMARY KEY,
+    ProductName VARCHAR(100),
+    Category VARCHAR(50),
+    Price DECIMAL(10,2)
+);
+INSERT INTO Products VALUES
+(1,'Laptop A','Electronics',60000),
+(2,'Laptop B','Electronics',55000),
+(3,'Laptop C','Electronics',55000),
+(4,'Phone A','Electronics',30000),
+(5,'Chair A','Furniture',8000),
+(6,'Chair B','Furniture',7500),
+(7,'Sofa A','Furniture',7500),
+(8,'Table A','Furniture',6000);
+SELECT * FROM Products;
+
+SELECT *
+FROM
+(
+    SELECT ProductID,
+           ProductName,
+           Category,
+           Price,
+           ROW_NUMBER() OVER
+           (
+               PARTITION BY Category
+               ORDER BY Price DESC
+           ) AS Row_Number
+    FROM Products
+) AS RankedProducts
+WHERE Row_Number <= 3;
+
+SELECT *
+FROM
+(
+    SELECT ProductID,
+           ProductName,
+           Category,
+           Price,
+           RANK() OVER
+           (
+               PARTITION BY Category
+               ORDER BY Price DESC
+           ) AS Rank_No
+    FROM Products
+) AS RankedProducts
+WHERE Rank_No <= 3;
+
+SELECT *
+FROM
+(
+    SELECT ProductID,
+           ProductName,
+           Category,
+           Price,
+           DENSE_RANK() OVER
+           (
+               PARTITION BY Category
+               ORDER BY Price DESC
+           ) AS Dense_Rank
+    FROM Products
+) AS RankedProducts
+WHERE Dense_Rank <= 3;
