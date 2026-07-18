@@ -1,7 +1,13 @@
-@SwaggerDemo_HostAddress = http://localhost:5264
+<Project Sdk="Microsoft.NET.Sdk.Web">
 
-GET {{SwaggerDemo_HostAddress}}/weatherforecast/
-Accept: application/json
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
 
-###
+  <ItemGroup>
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.6.2" />
+  </ItemGroup>
 
+</Project>
