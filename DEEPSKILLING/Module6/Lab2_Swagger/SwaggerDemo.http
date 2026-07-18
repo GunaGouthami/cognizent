@@ -3,5 +3,3 @@
 GET {{SwaggerDemo_HostAddress}}/weatherforecast/
 Accept: application/json
 
-###
-
